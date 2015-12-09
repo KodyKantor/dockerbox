@@ -7,6 +7,7 @@ import (
 	"stash.veritas.com/scm/kody/dockerbox/operation/cd"
 	"stash.veritas.com/scm/kody/dockerbox/operation/fallback"
 	"stash.veritas.com/scm/kody/dockerbox/operation/ls"
+	"stash.veritas.com/scm/kody/dockerbox/operation/start"
 )
 
 //Operationer interface is an abstraction for terminal operations.
@@ -22,6 +23,8 @@ func GetOperation(name string) Operationer {
 		return &ls.List{}
 	case "cc":
 		return &cd.Chdir{}
+	case "start":
+		return &start.Start{}
 	default:
 		fmt.Println("Falling back!")
 		return &fallback.Fallback{Operation: name}

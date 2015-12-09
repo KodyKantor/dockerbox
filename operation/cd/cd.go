@@ -35,8 +35,7 @@ func (cd *Chdir) DoStuff(c *cli.Context) {
 	//TODO we only currently support 'cd <container name>', which will bring a
 	// user into the '/' directory in a container. We should support 'cd <name>/path'
 	// and open a shell in the path that they specify.
-	cmd := make([]string, 1)
-	cmd[0] = "sh"
+	cmd := []string{"sh"}
 	utils.RunCmd(containerName, cmd, true)
 
 }

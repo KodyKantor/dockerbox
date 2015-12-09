@@ -90,6 +90,7 @@ Future tasks:
 
 * Separate listed containers into host-based subdirectories
 * Have the `cc` command take a path to navigate to inside the container
+* Bash auto-complete
 * (big one) Make this binary into an interactive shell
   * This would allow us to not worry about messing up terminal
   commands

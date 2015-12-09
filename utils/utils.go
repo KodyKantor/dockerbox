@@ -104,7 +104,7 @@ func GetContainerName(arg string) (string, error) {
 	}
 	if len(split) > 1 && strings.Index(split[1], "swarm-") == 0 {
 		//fmt.Println("Swarm node included in name")
-		return strings.Join(split[1:], "/"), nil //swarm support
+		return strings.Join(split[1:3], "/"), nil //swarm support
 	}
 	if len(split) > 1 && split[0] == "containers" {
 		//fmt.Printf("Returning %q\n", split[1])
