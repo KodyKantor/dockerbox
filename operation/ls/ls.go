@@ -20,7 +20,7 @@ func (l *List) DoStuff(c *cli.Context) {
 
 	if len(c.Args()) == 0 {
 		// didn't provide a container, so list all of 'em
-		listAllContainers()
+		utils.RunLinuxCmd(c)
 		return
 	}
 
@@ -29,6 +29,12 @@ func (l *List) DoStuff(c *cli.Context) {
 	containerName, err := utils.GetContainerName(args[0])
 	if err != nil {
 		fmt.Println("Error getting container name:", err)
+		return
+	}
+
+	if containerName == "" {
+		listAllContainers()
+		return
 	}
 
 	loc := strings.Index(args[0], containerName)
@@ -45,8 +51,6 @@ func (l *List) DoStuff(c *cli.Context) {
 	cmd[1] = "/" + subDir
 	cmd[2] = "--color=tty"
 	cmd = append(cmd, otherArgs...)
-
-	fmt.Printf("Trying: %q\n", cmd)
 
 	utils.RunCmd(containerName, cmd, true)
 }

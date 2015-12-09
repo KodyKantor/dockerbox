@@ -18,11 +18,15 @@ type Fallback struct {
 // DoStuff takes a cli context, and tries its best to do what the
 // user intended.
 func (f *Fallback) DoStuff(c *cli.Context) {
-
+	if strings.Index(c.Args()[0], "/containers") != 0 {
+		utils.RunLinuxCmd(c)
+		return
+	}
 	args := c.Args()
 	containerName, err := utils.GetContainerName(args[0])
 	if err != nil {
 		fmt.Println("Error getting container name:", err)
+		return
 	}
 
 	loc := strings.Index(args[0], containerName)
@@ -39,7 +43,7 @@ func (f *Fallback) DoStuff(c *cli.Context) {
 	cmd[1] = subDir
 	cmd = append(cmd, otherArgs...)
 
-	fmt.Printf("Trying: %q\n", cmd)
-	utils.RunCmd(containerName, cmd, false)
+	//fmt.Printf("Trying: %q\n", cmd)
+	utils.RunCmd(containerName, cmd, true)
 
 }

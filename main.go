@@ -20,5 +20,4 @@ func main() {
 
 func pickFunction(c *cli.Context) {
 	operation.GetOperation(c.App.Name).DoStuff(c)
-	//operation.GetOperation("cat").DoStuff(c)
 }
