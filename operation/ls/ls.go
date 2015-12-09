@@ -52,7 +52,7 @@ func (l *List) DoStuff(c *cli.Context) {
 	cmd[2] = "--color=tty"
 	cmd = append(cmd, otherArgs...)
 
-	utils.RunCmd(containerName, cmd, true)
+	utils.RunCmd(containerName, cmd, false)
 }
 
 func listAllContainers() error {

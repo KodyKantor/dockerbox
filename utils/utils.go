@@ -13,8 +13,8 @@ import (
 
 // RunCmd takes the name of a container, and a command to run (a list of arguments).
 // It sets up a 'docker exec'-type command and executes it.
-func RunCmd(container string, command []string, detach bool) {
-	fmt.Printf("Trying %q\n", command)
+func RunCmd(container string, command []string, stdin bool) {
+	//fmt.Printf("Trying %q\n", command)
 	client, err := docker.NewClientFromEnv()
 	if err != nil {
 		fmt.Println("Couldn't connect to docker:", err)
@@ -23,7 +23,7 @@ func RunCmd(container string, command []string, detach bool) {
 
 	//fmt.Println("container:", container)
 	exec, err := client.CreateExec(docker.CreateExecOptions{
-		AttachStdin:  !detach,
+		AttachStdin:  stdin,
 		AttachStdout: true,
 		AttachStderr: true,
 		Tty:          true,
@@ -37,7 +37,7 @@ func RunCmd(container string, command []string, detach bool) {
 	}
 
 	err = client.StartExec(exec.ID, docker.StartExecOptions{
-		Detach:       !detach,
+		Detach:       false,
 		Tty:          true,
 		InputStream:  os.Stdin,
 		OutputStream: os.Stdout,
@@ -98,13 +98,12 @@ func GetContainerName(arg string) (string, error) {
 	}
 	if len(split) > 1 && strings.Index(split[1], "swarm-") == 0 {
 		//fmt.Println("Swarm node included in name")
-		return strings.Join(split[1:], "/"), nil
+		return strings.Join(split[1:], "/"), nil //swarm support
 	}
 	if len(split) > 1 && split[0] == "containers" {
 		//fmt.Printf("Returning %q\n", split[1])
 		return split[1], nil // user provided '/containers/<container name>'
 	}
-
 	if len(split) > 1 && split[0] != "containers" {
 		//fmt.Println("got containername/subdir")
 		return split[0], nil // user provided '<name>/<subdir>'

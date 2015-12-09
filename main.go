@@ -11,7 +11,7 @@ import (
 
 func main() {
 	app := cli.NewApp()
-	app.Usage = "present docker containers as a semi-posix filesystem!"
+	app.Usage = "gives a devops engineer the power to use the tools they know for the job they love <3"
 	app.Name = os.Args[0][strings.LastIndex(os.Args[0], "/")+1:]
 	app.Action = pickFunction
 

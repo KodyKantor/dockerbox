@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/codegangsta/cli"
+	"stash.veritas.com/scm/kody/dockerbox/operation/cd"
 	"stash.veritas.com/scm/kody/dockerbox/operation/fallback"
 	"stash.veritas.com/scm/kody/dockerbox/operation/ls"
 )
@@ -19,6 +20,8 @@ func GetOperation(name string) Operationer {
 	switch name {
 	case "ls":
 		return &ls.List{}
+	case "cc":
+		return &cd.Chdir{}
 	default:
 		fmt.Println("Falling back!")
 		return &fallback.Fallback{Operation: name}

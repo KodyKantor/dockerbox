@@ -44,6 +44,6 @@ func (f *Fallback) DoStuff(c *cli.Context) {
 	cmd = append(cmd, otherArgs...)
 
 	//fmt.Printf("Trying: %q\n", cmd)
-	utils.RunCmd(containerName, cmd, true)
+	utils.RunCmd(containerName, cmd, false)
 
 }
