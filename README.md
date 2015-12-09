@@ -23,6 +23,7 @@ For example, take the `ls` command. Normally, an `ls` will list all
 files and subdirectories of a given directory.
 
 Here's what `ls` does on my system.
+
 ```
 $ ls /
 Applications              cores                     opt
@@ -36,6 +37,7 @@ bin                       net
 
 Hm. That's cool. Now let's see how we can `ls /` inside of a
 container.
+
 ```
 # first we need to know the name of the container
 $ docker ps
@@ -47,10 +49,12 @@ CONTAINER ID        IMAGE               COMMAND               CREATED           
 $ docker exec -it swarm-agent-01/cadvisor /bin/sh
 / #
 ```
+
 That seems like a lot of work just to get a shell in a container.
 
 What if we could just use the commands we already know? That's what
 dockerbox does! Once it's installed, this is how we do the same thing.
+
 ```
 # find the name of the container by listing containers
 $ ls /containers
