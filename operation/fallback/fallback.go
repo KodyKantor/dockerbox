@@ -18,6 +18,10 @@ type Fallback struct {
 // DoStuff takes a cli context, and tries its best to do what the
 // user intended.
 func (f *Fallback) DoStuff(c *cli.Context) {
+	if len(c.Args()) == 0 {
+		cli.ShowAppHelp(c)
+		return
+	}
 	if strings.Index(c.Args()[0], "/containers") != 0 {
 		utils.RunLinuxCmd(c)
 		return

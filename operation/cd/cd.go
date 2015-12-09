@@ -8,6 +8,9 @@ import (
 )
 
 // Chdir implements the Operationer interface.
+// Unfortunately 'cd' is a built-in shell command. We would have to do magic (
+// LD_PRELOAD, write our own shell) to intercept the 'cd' command. Instead, we
+// are targeting the 'cc' command, because who uses 'cc' anymore, right? :)
 type Chdir struct{}
 
 // DoStuff will create a shell session inside the chosen container.

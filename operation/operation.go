@@ -9,7 +9,7 @@ import (
 	"stash.veritas.com/scm/kody/dockerbox/operation/ls"
 )
 
-//Operationer interface is an abstraction for stuff
+//Operationer interface is an abstraction for terminal operations.
 type Operationer interface {
 	DoStuff(*cli.Context)
 }

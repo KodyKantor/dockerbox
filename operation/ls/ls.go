@@ -1,4 +1,7 @@
-// Package ls overrides a normal filesystem 'ls' command.
+// Package ls overrides a normal filesystem 'ls' command. If the user performs
+// an 'ls /containers' command, it will list all containers in a cluster.
+// If the user performs an 'ls /containers/<containername>', the container's
+// filesystem will be listed.
 package ls
 
 import (
@@ -19,7 +22,7 @@ type List struct{}
 func (l *List) DoStuff(c *cli.Context) {
 
 	if len(c.Args()) == 0 {
-		// didn't provide a container, so list all of 'em
+		// user just did an 'ls', which is out of the context of /containers
 		utils.RunLinuxCmd(c)
 		return
 	}
@@ -32,13 +35,18 @@ func (l *List) DoStuff(c *cli.Context) {
 		return
 	}
 
+	// the user entered 'ls /containers'
 	if containerName == "" {
 		listAllContainers()
 		return
 	}
 
+	// find the beginning of the container name in the argument string
 	loc := strings.Index(args[0], containerName)
+	//extract the subdirectory
 	subDir := args[0][loc+len(containerName):]
+
+	// put the rest of the arguments in a separate slice
 	otherArgs := make([]string, 1)
 	for _, arg := range args[1:] {
 		otherArgs = append(otherArgs, string(arg))
@@ -52,6 +60,7 @@ func (l *List) DoStuff(c *cli.Context) {
 	cmd[2] = "--color=tty"
 	cmd = append(cmd, otherArgs...)
 
+	// run the command on the container w/ other arguments
 	utils.RunCmd(containerName, cmd, false)
 }
 
@@ -63,6 +72,7 @@ func listAllContainers() error {
 		fmt.Println("Couldn't connect to docker:", err)
 	}
 
+	// get all of the containers
 	containers, err := client.ListContainers(docker.ListContainersOptions{All: true})
 	if err != nil {
 		return fmt.Errorf("Error listing containers: %v", err)
@@ -86,7 +96,8 @@ func listAllContainers() error {
 		}
 
 		// print three containers per row
-		// this is stupid, but I don't want to spend hours on this junk
+		// this isn't the best, but I don't want to spend hours on this junk
+		// it doesn't work with linux piping :(
 		if num%3 == 0 {
 			num = 0
 			fmt.Fprintln(table)

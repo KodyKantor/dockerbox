@@ -1,3 +1,5 @@
+// Package utils provides functions that all operations can use
+// to kick off the execution of their commands.
 package utils
 
 import (
@@ -22,6 +24,7 @@ func RunCmd(container string, command []string, stdin bool) {
 	}
 
 	//fmt.Println("container:", container)
+	// allocate an execution environment
 	exec, err := client.CreateExec(docker.CreateExecOptions{
 		AttachStdin:  stdin,
 		AttachStdout: true,
@@ -36,6 +39,7 @@ func RunCmd(container string, command []string, stdin bool) {
 		return
 	}
 
+	// start the command that is ready to run
 	err = client.StartExec(exec.ID, docker.StartExecOptions{
 		Detach:       false,
 		Tty:          true,
@@ -50,7 +54,9 @@ func RunCmd(container string, command []string, stdin bool) {
 	}
 }
 
-// RunLinuxCmd just does a normal linux command.
+// RunLinuxCmd just does a normal linux command. This is used if we can't
+// run a certain command, or if a command was run out of the context of the /containers
+// directory.
 func RunLinuxCmd(c *cli.Context) {
 	//fmt.Println("Not container directory")
 	env := os.Getenv("PATH")
