@@ -87,6 +87,7 @@ For 80% of use cases, it's probably fine that you don't get all of
 the nitty gritty details and flags that the Docker cli supports.
 
 Future tasks:
+
 * Separate listed containers into host-based subdirectories
 * Have the `cc` command take a path to navigate to inside the container
 * (big one) Make this binary into an interactive shell
