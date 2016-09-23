@@ -11,7 +11,7 @@ import (
 	tm "github.com/buger/goterm"
 	"github.com/codegangsta/cli"
 	docker "github.com/fsouza/go-dockerclient"
-	"stash.veritas.com/scm/kody/dockerbox/utils"
+	"github.com/kodykantor/dockerbox/utils"
 )
 
 // List structure implements opinterface.

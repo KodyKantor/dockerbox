@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"stash.veritas.com/scm/kody/dockerbox/utils"
+	"github.com/kodykantor/dockerbox/utils"
 
 	"github.com/codegangsta/cli"
 )

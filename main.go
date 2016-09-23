@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"stash.veritas.com/scm/kody/dockerbox/operation"
+	"github.com/kodykantor/dockerbox/operation"
 
 	"github.com/codegangsta/cli"
 )

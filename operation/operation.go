@@ -4,10 +4,10 @@ import (
 	"fmt"
 
 	"github.com/codegangsta/cli"
-	"stash.veritas.com/scm/kody/dockerbox/operation/cd"
-	"stash.veritas.com/scm/kody/dockerbox/operation/fallback"
-	"stash.veritas.com/scm/kody/dockerbox/operation/ls"
-	"stash.veritas.com/scm/kody/dockerbox/operation/start"
+	"github.com/kodykantor/dockerbox/operation/cd"
+	"github.com/kodykantor/dockerbox/operation/fallback"
+	"github.com/kodykantor/dockerbox/operation/ls"
+	"github.com/kodykantor/dockerbox/operation/start"
 )
 
 //Operationer interface is an abstraction for terminal operations.

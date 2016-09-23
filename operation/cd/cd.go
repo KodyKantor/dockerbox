@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/codegangsta/cli"
-	"stash.veritas.com/scm/kody/dockerbox/utils"
+	"github.com/kodykantor/dockerbox/utils"
 )
 
 // Chdir implements the Operationer interface.
