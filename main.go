@@ -14,7 +14,7 @@ func main() {
 	app.Usage = "gives a devops engineer the power to use the tools they know for the job they love <3"
 	app.Name = os.Args[0][strings.LastIndex(os.Args[0], "/")+1:]
 	app.Action = pickFunction
-	app.Authors = []cli.Author{cli.Author{Name: "Kody A Kantor", Email: "kody.kantor@veritas.com"}}
+	app.Authors = []cli.Author{cli.Author{Name: "Kody A Kantor", Email: "kody.kantor@gmail.com"}}
 	app.Version = "Hackathon 2.0"
 
 	app.Run(os.Args)
